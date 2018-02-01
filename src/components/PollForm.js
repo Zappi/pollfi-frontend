@@ -5,8 +5,8 @@ class PollForm extends React.Component {
         super()
         this.state = {
             questionName: '',
-            name: '',
-            shareholders: [{ name: '' }]
+            option: '',
+            options: [{ option: '' }]
         }
     }
 
@@ -14,27 +14,33 @@ class PollForm extends React.Component {
         this.setState({
             questionName: e.target.value
         })
+        console.log(this.state)
     }
 
     handleShareholderName = (idx) => (e) => {
-        const newShareholders = this.state.shareholders.map((shareholder, sidx) => {
-            if (idx !== sidx) return shareholder;
-            return { ...shareholder, name: e.target.value }
+        const newOption = this.state.options.map((option, sidx) => {
+            if (idx !== sidx) return option;
+            return { ...option, option: e.target.value }
         });
 
-        this.setState({ shareholders: newShareholders })
+        this.setState({ options: newOption })
     }
 
     addShareHolder = () => {
         this.setState({
-            shareholders: this.state.shareholders.concat([{ name: '' }])
+            options: this.state.options.concat([{ option: '' }])
         })
     }
 
     handleRemoveShareholder = (idx) => () => {
         this.setState({
-            shareholders: this.state.shareholders.filter((s, sidx) => idx !== sidx)
+            options: this.state.options.filter((s, sidx) => idx !== sidx)
         });
+    }
+
+    handleSubmit = (e) => {
+        e.preventDefault()
+        console.log(this.state)
     }
 
     render() {
@@ -46,14 +52,14 @@ class PollForm extends React.Component {
                         <input
                             className='input is-primary'
                             type='text'
-                            placeholder={`Add queston`}
+                            placeholder={`Add question`}
                             value={this.state.questionName}
                             onChange={this.handleQuestionName}
                         />
                     </div>
 
 
-                    {this.state.shareholders.map((shareholder, idx) => (
+                    {this.state.options.map((shareholder, idx) => (
                         <div  key={idx} className='field'>
                             <div className='shareholder'>
                                 <input

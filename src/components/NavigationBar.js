@@ -1,14 +1,14 @@
 import React from 'react'
+import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
 
-const NavigationBar = () => {
-
-    return (
-        <div>
-            <a className='button is-primary'>
-                Click click
-            </a>
-        </div>
-    )
+class NavigationBar extends React.Component {
+    render() {
+        return (
+            <div>
+                Navigation bar to here maybe someday?
+            </div>    
+        )
+    }
 }
 
 export default NavigationBar

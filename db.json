@@ -1,0 +1,9 @@
+{
+    "polls": [
+        {
+            "id": 1,
+            "questionName": "What is your favorite beer?",
+            "options": [{"option": "Ale"}, {"option": "Lager"}]            
+        }
+    ]
+}
