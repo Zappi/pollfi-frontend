@@ -2,8 +2,15 @@
     "polls": [
         {
             "id": 1,
-            "questionName": "What is your favorite beer?",
-            "options": [{"option": "Ale"}, {"option": "Lager"}]            
+            "question": "What is your favorite beer?",
+            "options": [{"option":"Ale", "upvotes": 4}, {"option":"Lager", "upvotes":2}],
+            "likes": 5            
+        },
+        {
+            "id": 2,
+            "question": "What is your favorite food?",
+            "options": [{"option":"Pizza", "upvotes": 2}, {"option":"Lager", "upvotes":1}],
+            "likes": 2
         }
     ]
 }

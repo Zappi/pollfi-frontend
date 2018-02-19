@@ -1,19 +1,32 @@
 import React from 'react'
 import axios from 'axios'
+import PollElement from './PollElement'
+import pollService from '../services/polls'
 
 class Polls extends React.Component {
-    render() {
+    constructor(props) {
+        super(props)
+        this.state = {
+            polls: []
+        }
+    }
 
-        axios.get('http://localhost:3001/polls')
-        .then(response => {
-            const polls = response.data
-            console.log(polls)
+    async componentDidMount() {
+        const polls = await pollService.getAll()
+        this.setState({
+            polls
         })
-        
+    }
 
+
+    render() {
         return (
             <div>
-                <h2> Polls </h2>
+
+                {this.state.polls.map(poll =>
+                    <PollElement key={poll.id} data={poll} />
+                )}
+
             </div>
         )
     }
