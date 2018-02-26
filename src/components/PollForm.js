@@ -1,18 +1,21 @@
 import React from 'react'
+import { Redirect } from 'react-router'
+import pollService from '../services/polls'
 
 class PollForm extends React.Component {
     constructor() {
         super()
         this.state = {
-            questionName: '',
+            question: '',
             option: '',
-            options: [{ option: '' }]
+            options: [{ option: '', upvotes: 0}],
+            fireRedirect: false
         }
     }
 
     handleQuestionName = (e) => {
         this.setState({
-            questionName: e.target.value
+            question: e.target.value
         })
         console.log(this.state)
     }
@@ -28,7 +31,7 @@ class PollForm extends React.Component {
 
     addShareHolder = () => {
         this.setState({
-            options: this.state.options.concat([{ option: '' }])
+            options: this.state.options.concat([{ option: '', upvotes: 0}])
         })
     }
 
@@ -40,7 +43,9 @@ class PollForm extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
-        console.log(this.state)
+        pollService.create(this.state)
+        this.setState({fireRedirect: true})
+
     }
 
     render() {
@@ -81,6 +86,9 @@ class PollForm extends React.Component {
                     <button className='button is-primary'> Save! </button>
 
                 </form>
+                {this.state.fireRedirect && (
+                    <Redirect to={'/polls'} />
+                )}
             </div>
         )
     }
