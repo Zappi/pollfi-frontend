@@ -4,8 +4,9 @@ import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
 class NavigationBar extends React.Component {
     render() {
         return (
-            <div>
-                Navigation bar to here maybe someday?
+            <div className="container">
+
+                <h3> Navigation bar to here maybe someday? </h3>
             </div>    
         )
     }

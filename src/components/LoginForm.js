@@ -1,10 +1,15 @@
 import React from 'react'
 import loginService from '../services/login'
 import pollService from '../services/polls'
+import tokenService from '../services/token'
+import { Redirect } from 'react-router'
 
 class LoginForm extends React.Component {
     constructor() {
         super()
+        this.state = {
+            fireRedirect: false
+        }
     }
 
     login = async (e) => {
@@ -16,20 +21,28 @@ class LoginForm extends React.Component {
                 username: e.target.username.value,
                 password: e.target.password.value
             })
-      
+
             console.log(user)
 
             window.localStorage.setItem('loggedUser', JSON.stringify(user))
-            pollService.setToken(user.token)
-   
 
+
+            this.props.handleSubmit()
         } catch (exception) {
             console.log("LOG IN FAILED, MAKE SOME NOTIFICATION HERE")
         }
+        this.forceUpdate()
+        this.setState({
+            fireRedirect: true
+        })
+
+
+
     }
 
 
     render() {
+
         return (
             <div>
                 <h2> Log in </h2>
@@ -62,6 +75,12 @@ class LoginForm extends React.Component {
 
                 </form>
 
+
+                {this.state.fireRedirect && (
+
+                    <Redirect to='/profile' />
+
+                )}
             </div>
         )
     }

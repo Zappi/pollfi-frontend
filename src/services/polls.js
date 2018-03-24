@@ -1,7 +1,7 @@
 import axios from 'axios'
-const baseUrl = 'http://localhost:3001/api/polls'
+import tokenService from './token'
 
-let token  = null
+const baseUrl = 'http://localhost:3001/api/polls'
 
 const getAll = async () => {
     const response = await axios.get(baseUrl)
@@ -13,15 +13,11 @@ const getSinglePoll = async (id) => {
     return response.data
 }
 
-const setToken = (newToken) => {
-    token = newToken
-}
-
 const create = async (newPoll) => {
-
+    console.log(tokenService.getToken())
     const config = {
         headers: {
-            'Authorization': token
+            'Authorization': tokenService.getToken()
         }
     }
 
@@ -34,4 +30,4 @@ const remove = async (id) => {
     return await axios.delete(`${baseUrl}/${id}`)
 }
 
-export default {getAll, getSinglePoll, create, remove, setToken}
+export default {getAll, getSinglePoll, create, remove}
