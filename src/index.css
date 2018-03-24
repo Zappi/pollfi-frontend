@@ -4,8 +4,16 @@ body {
   font-family: sans-serif;
 }
 
+.nav-bar {
+  padding: 50px;
+}
+
 .listed-poll {
   border-style: solid;
   padding: 10px;
   margin-top: 5px;
+}
+
+.keepAtSameRow {
+  display: inline-block;
 }

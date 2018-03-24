@@ -31,7 +31,7 @@ class LoginForm extends React.Component {
         } catch (exception) {
             console.log("LOG IN FAILED, MAKE SOME NOTIFICATION HERE")
         }
-        this.forceUpdate()
+    
         this.setState({
             fireRedirect: true
         })

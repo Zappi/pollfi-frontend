@@ -4,8 +4,8 @@ import PollFrom from './components/PollForm'
 import Polls from './components/Polls'
 import Profile from './components/Profile'
 import LoginForm from './components/LoginForm'
-import { BrowserRouter as Router, Route, Link, Redirect} from 'react-router-dom'
-import './App.css';
+import Container from './components/Container'
+import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom'
 
 class App extends Component {
   constructor(props) {
@@ -14,6 +14,7 @@ class App extends Component {
       loggedIn: false,
       fireRedirect: false
     }
+    
   }
 
   componentDidMount() {
@@ -26,72 +27,42 @@ class App extends Component {
         loggedIn: false
       })
     }
-  
+
   }
 
-  handeLogin = () => {
+  handleLogin = () => {
     this.setState({
       loggedIn: true
     })
   }
 
-  logOut = () => {
+  logout = () => {
     this.setState({
       loggedIn: false,
       fireRedirect: true
     })
     window.localStorage.clear()
-   
-    {this.state.fireRedirect && (
-      <Redirect to='/'/>
-    )}
+
+    {
+      this.state.fireRedirect && (
+        <Redirect to='/' />
+      )
+    }
 
   }
 
 
   render() {
 
-    const isLoggedIn = this.state.loggedIn
-
     return (
-      <div className="container">
-        <div>
-          <NavigationBar />
-          <Router>
-         
-            <div className="container">
-              <div>
-                <Link to='/'> Home </Link>
-                <Link to='/polls'> Polls </Link>
-                <Link to='/polls/newpoll'> Create a poll </Link>
+      <div>
+        <Router>
+          <div>
+            <NavigationBar isLoggedIn={this.state.loggedIn} logout={this.logout}/>
+            <Container handleLogin={this.handleLogin} />
+          </div>
+        </Router>
 
-                {!isLoggedIn ? (
-                  <Link to='/login'> Log in </Link>
-                ) : (
-                    <div>
-                      <Link to='/profile'> Profile </Link>
-                      <Link to='/logout' onClick={this.logOut}> Log out </Link>
-                    </div>
-                  )}
-
-              </div>
-
-              <Route exact path='/' render={() => 'Home'} />
-              <Route exact path='/polls' render={() => <Polls />} />
-              <Route path='/polls/newpoll' render={() => <PollFrom />} />
-              <Route path='/login' render={() => <LoginForm handleSubmit={this.handeLogin}/>} />
-
-            
-              <Route path='/profile' render={() => <Profile />} />
- 
-            </div>
-              
-    
-          </Router>
-
-
-
-        </div>
       </div>
 
     );
