@@ -1,10 +1,9 @@
-import React from 'react'
-import axios from 'axios'
-import PollElement from './PollElement'
+import React, {Component} from 'react'
+import ListedPollElement from './ListedPollElement'
 import pollService from '../services/polls'
-import { Redirect } from 'react-router'
+import { Redirect } from 'react-router-dom'
 
-class Polls extends React.Component {
+class Polls extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -35,11 +34,11 @@ class Polls extends React.Component {
         return (
             <div>
                 {this.state.polls.map(poll =>
-                    <PollElement key={poll.id} data={poll} onClick={() => this.handleClick(poll.id)} />
+                    <ListedPollElement key={poll.id} data={poll} onClick={() => this.handleClick(poll.id)} />
                 )}
 
                 {this.state.fireRedirect && (
-                    <Redirect to={`/polls/${this.state.pollId}`} />
+                    <Redirect to={`/polls/poll/${this.state.pollId}`} />
                 )}
 
             </div>

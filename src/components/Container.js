@@ -1,30 +1,28 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PollFrom from './PollForm'
 import Polls from './Polls'
 import Profile from './Profile'
 import LoginForm from './LoginForm'
-import {BrowserRouter as Router, Route} from 'react-router-dom'
+import PollElement from './PollElement'
+import { Route } from 'react-router-dom'
 
-class Container extends Component {
-    constructor() {
-        super()
-    }
+const Container = (props) => {
 
-    render() {
-        return (
-        
-            <div>
-                <Route exact path='/' render={() => 'Home'} />
-                <Route exact path='/polls' render={() => <Polls />} />
-                <Route path='/polls/newpoll' render={() => <PollFrom />} />
+    return (
 
-                <Route path='/login' render={() => <LoginForm handleSubmit={this.props.handleLogin} />} />
+        <div>
+            <Route exact path='/' render={() => 'Home'} />
+            <Route exact path='/polls' render={() => <Polls />} />
+            <Route exact path='/polls/newpoll' render={() => <PollFrom />} />
+            <Route exact path='/polls/poll/:id' render={({ match }) => <PollElement pollId={(match.params.id)} />} />
 
-                <Route path='/profile' render={() => <Profile />} />
-            </div>
-        
-        )
-    }
+            <Route path='/login' render={() => <LoginForm handleSubmit={props.handleLogin} />} />
+
+            <Route path='/profile' render={() => <Profile />} />
+        </div>
+
+    )
+
 }
 
 export default Container

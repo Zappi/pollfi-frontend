@@ -1,22 +1,32 @@
-import React from 'react'
-import pollService from '../services/polls'
+import React, { Component } from 'react'
+import PollService from '../services/polls'
 
-const PollElement = ({ data, onClick }) => {
+class PollElement extends Component {
+    constructor() {
+        super()
 
-    const deletePoll = (id) => {
-        pollService.remove(id)
+        this.state = {
+            poll: []
+        }
     }
 
-    return (
-        <div onClick={onClick}>
-            {console.log(data)}
-            <div className="listed-poll">
-                <h2> {data.question} </h2>
-                <h4> Likes: {data.likes} </h4>
-                <button onClick={() => deletePoll(data.id)}> x </button>
-            </div>
-        </div>
-    )
+    async componentDidMount() {
+        await PollService.getSinglePoll(this.props.pollId).then(poll => this.setState({
+            poll
+        }))
+
+    }
+
+    render() {
+
+        return (
+
+            <div>
+                <h2> {this.state.poll.question} </h2>
+            </div >
+
+        )
+    }
 }
 
 export default PollElement

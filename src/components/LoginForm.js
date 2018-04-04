@@ -1,10 +1,8 @@
-import React from 'react'
+import React, {Component} from 'react'
 import loginService from '../services/login'
-import pollService from '../services/polls'
-import tokenService from '../services/token'
 import { Redirect } from 'react-router'
 
-class LoginForm extends React.Component {
+class LoginForm extends Component {
     constructor() {
         super()
         this.state = {

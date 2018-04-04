@@ -1,8 +1,8 @@
-import React from 'react'
+import React, {Component} from 'react'
 import { Redirect } from 'react-router'
 import pollService from '../services/polls'
 
-class PollForm extends React.Component {
+class PollForm extends Component {
     constructor() {
         super()
         this.state = {
@@ -12,7 +12,7 @@ class PollForm extends React.Component {
             fireRedirect: false
         }
     }
-
+    
     handleQuestionName = (e) => {
         this.setState({
             question: e.target.value

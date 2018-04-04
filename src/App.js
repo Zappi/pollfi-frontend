@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import NavigationBar from './components/NavigationBar'
-import PollFrom from './components/PollForm'
-import Polls from './components/Polls'
-import Profile from './components/Profile'
-import LoginForm from './components/LoginForm'
 import Container from './components/Container'
-import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom'
+import { BrowserRouter as Router, Redirect} from 'react-router-dom'
 
 class App extends Component {
   constructor(props) {
@@ -55,8 +51,8 @@ class App extends Component {
   render() {
 
     return (
-      <div>
-        <Router>
+      <div className='container'>
+        <Router >
           <div>
             <NavigationBar isLoggedIn={this.state.loggedIn} logout={this.logout}/>
             <Container handleLogin={this.handleLogin} />

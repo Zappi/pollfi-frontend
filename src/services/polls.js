@@ -9,9 +9,24 @@ const getAll = async () => {
 }
 
 const getSinglePoll = async (id) => {
-    const response = await axios.get(`${baseUrl}/${id}`)
+    const response = await axios.get(`${baseUrl}/poll/${id}`)
     return response.data
 }
+
+const getPollFormAuth = async() => {
+
+    const config = {
+        headers: {
+            'Authorization': tokenService.getToken()
+        }
+    }
+
+    const response = await axios.get(`${baseUrl}/newpoll`, config)
+    console.log(response)
+    console.log('jaa')
+    return response.data
+}
+
 
 const create = async (newPoll) => {
     console.log(tokenService.getToken())
@@ -22,12 +37,12 @@ const create = async (newPoll) => {
     }
 
     const res = await axios.post(baseUrl, newPoll, config)
-
+ 
     return res.data
 }
 
 const remove = async (id) => {
-    return await axios.delete(`${baseUrl}/${id}`)
+    return await axios.delete(`${baseUrl}/poll/${id}`)
 }
 
-export default {getAll, getSinglePoll, create, remove}
+export default {getAll, getSinglePoll, getPollFormAuth, create, remove}

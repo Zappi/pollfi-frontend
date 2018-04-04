@@ -15,5 +15,9 @@ const getProfile = async () => {
 
 }
 
+const getUserFromLocalStorage = () => {
+    return JSON.parse(window.localStorage.getItem('loggedUser'))
+}
 
-export default {getProfile}
+
+export default {getProfile, getUserFromLocalStorage}
