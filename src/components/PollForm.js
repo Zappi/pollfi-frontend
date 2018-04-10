@@ -44,10 +44,9 @@ class PollForm extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
-        console.log('vittu')
-        pollService.create(this.state)
-        
-        this.setState({ fireRedirect: true })
+        pollService.create(this.state).then(res =>
+
+            this.setState({ fireRedirect: true }))
 
     }
 
