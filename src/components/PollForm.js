@@ -1,6 +1,7 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import { Redirect } from 'react-router'
 import pollService from '../services/polls'
+import Polls from './Polls'
 
 class PollForm extends Component {
     constructor() {
@@ -8,11 +9,11 @@ class PollForm extends Component {
         this.state = {
             question: '',
             option: '',
-            options: [{ option: '', upvotes: 0}],
+            options: [{ option: '', upvotes: 0 }],
             fireRedirect: false
         }
     }
-    
+
     handleQuestionName = (e) => {
         this.setState({
             question: e.target.value
@@ -31,7 +32,7 @@ class PollForm extends Component {
 
     addShareHolder = () => {
         this.setState({
-            options: this.state.options.concat([{ option: '', upvotes: 0}])
+            options: this.state.options.concat([{ option: '', upvotes: 0 }])
         })
     }
 
@@ -43,8 +44,10 @@ class PollForm extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
+        console.log('vittu')
         pollService.create(this.state)
-        this.setState({fireRedirect: true})
+        
+        this.setState({ fireRedirect: true })
 
     }
 
@@ -65,7 +68,7 @@ class PollForm extends Component {
 
 
                     {this.state.options.map((shareholder, idx) => (
-                        <div  key={idx} className='field'>
+                        <div key={idx} className='field'>
                             <div className='shareholder'>
                                 <input
                                     className='input is-primary'

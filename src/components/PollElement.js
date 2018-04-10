@@ -14,7 +14,12 @@ class PollElement extends Component {
         await PollService.getSinglePoll(this.props.pollId).then(poll => this.setState({
             poll
         }))
+    }
 
+    async componenWillMount() {
+        await PollService.getSinglePoll(this.props.pollId).then(poll => this.setState({
+            poll
+        }))
     }
 
     render() {

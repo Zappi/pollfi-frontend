@@ -1,7 +1,7 @@
 import axios from 'axios'
 import tokenService from './token'
 
-const baseUrl = 'http://localhost:3001/api/polls'
+const baseUrl = 'http://fathomless-sands-25342.herokuapp.com/api/polls'
 
 const getAll = async () => {
     const response = await axios.get(baseUrl)

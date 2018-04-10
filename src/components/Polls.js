@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import ListedPollElement from './ListedPollElement'
 import pollService from '../services/polls'
 import { Redirect } from 'react-router-dom'
@@ -13,14 +13,15 @@ class Polls extends Component {
         }
     }
 
-
-
     async componentDidMount() {
         const polls = await pollService.getAll()
         this.setState({
             polls
         })
+   
     }
+
+
 
     handleClick(id) {
         this.setState({
@@ -29,12 +30,17 @@ class Polls extends Component {
         })
     }
 
+    removePoll(id) {
+        console.log(`poll ${id} removed`)
+        pollService.remove(id)
+    }
+
 
     render() {
         return (
             <div>
                 {this.state.polls.map(poll =>
-                    <ListedPollElement key={poll.id} data={poll} onClick={() => this.handleClick(poll.id)} />
+                    <ListedPollElement key={poll.id} data={poll} clickRemovePoll={() => this.removePoll(poll.id)} onClick={() => this.handleClick(poll.id)} />
                 )}
 
                 {this.state.fireRedirect && (

@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl='http://localhost:3001/api/authenticate'
+const baseUrl='http://fathomless-sands-25342.herokuapp.com/api/authenticate'
 
 const login = async (credientals) => {
     console.log(credientals)

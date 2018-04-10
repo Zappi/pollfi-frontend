@@ -4,10 +4,6 @@ import profileService from '../services/profile'
 
 const ListedPollElement = (props) => {
 
-    const removePoll = (id) => {
-        console.log("POLL REMOVED")
-        pollService.remove(id)
-    }
 
     const editPoll = (id) => {
         console.log("POLL EDITED")
@@ -27,7 +23,7 @@ const ListedPollElement = (props) => {
 
     return (
         <div>
-            {console.log(props.data)}
+            {console.log(props)}
 
             <div className="listed-poll" onClick={props.onClick}>
 
@@ -39,7 +35,7 @@ const ListedPollElement = (props) => {
             {profileId() === props.data.user._id &&
 
                 <div>
-                    <button onClick={() => removePoll(props.data.id)}> x </button>
+                    <button onClick={() => props.clickRemovePoll(props.data.id)}> x </button>
                     <button onClick={() => editPoll(props.data.id)}> Edit </button>
                 </div>
             }
