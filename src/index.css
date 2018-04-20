@@ -1,11 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
-}
-
-.nav-bar {
-  padding: 50px;
+  font-family: 'Lato', sans-serif;
 }
 
 .listed-poll {
@@ -17,3 +13,30 @@ body {
 .keepAtSameRow {
   display: inline-block;
 }
+
+/*Navbar styling */
+
+.nav-bar {
+  padding: 50px;
+}
+
+.nav-logo h2 {
+  display: inline;
+}
+
+.nav-links {
+  list-style: none;
+  float:right;
+  margin-top: 5px;
+  font-size: 20px
+}
+
+.nav-links li {
+  display: block;
+  float: left;
+  list-style: none;
+  padding: 0 10px;
+  text-decoration: none !important;
+}
+
+/*Navbar styling ends */

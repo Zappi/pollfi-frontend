@@ -23,7 +23,6 @@ const getPollFormAuth = async() => {
 
     const response = await axios.get(`${baseUrl}/newpoll`, config)
     console.log(response)
-    console.log('jaa')
     return response.data
 }
 
