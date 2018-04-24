@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import NavigationBar from './components/NavigationBar'
 import Container from './components/Container'
-import { BrowserRouter as Router, Redirect} from 'react-router-dom'
+import { BrowserRouter as Router, Redirect } from 'react-router-dom'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 class App extends Component {
   constructor(props) {
@@ -10,7 +11,7 @@ class App extends Component {
       loggedIn: false,
       fireRedirect: false
     }
-    
+
   }
 
   componentDidMount() {
@@ -41,8 +42,7 @@ class App extends Component {
 
     {
       this.state.fireRedirect && (
-        <Redirect to='/' />
-      )
+        <Redirect to='/' />)
     }
 
   }
@@ -51,15 +51,17 @@ class App extends Component {
   render() {
 
     return (
-      <div className='container'>
-        <Router >
-          <div>
-            <NavigationBar isLoggedIn={this.state.loggedIn} logout={this.logout}/>
-            <Container handleLogin={this.handleLogin} />
-          </div>
-        </Router>
+      <MuiThemeProvider>
+        <div className='container'>
+          <Router >
+            <div>
+              <NavigationBar isLoggedIn={this.state.loggedIn} logout={this.logout} />
+              <Container handleLogin={this.handleLogin} />
+            </div>
+          </Router>
 
-      </div>
+        </div>
+      </MuiThemeProvider>
 
     );
   }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import ListedPollElement from './ListedPollElement'
+import ListedPollCard from './ListedPollCard'
 import pollService from '../services/polls'
 import { Redirect } from 'react-router-dom'
 
@@ -18,7 +18,7 @@ class Polls extends Component {
         this.setState({
             polls
         })
-   
+
     }
 
 
@@ -39,9 +39,12 @@ class Polls extends Component {
     render() {
         return (
             <div>
-                {this.state.polls.map(poll =>
-                    <ListedPollElement key={poll.id} data={poll} clickRemovePoll={() => this.removePoll(poll.id)} onClick={() => this.handleClick(poll.id)} />
-                )}
+                <div>
+                    {this.state.polls.map(poll =>
+                        <ListedPollCard key={poll.id} data={poll} clickRemovePoll={() => this.removePoll(poll.id)} clickToOpen={() => this.handleClick(poll.id)} />
+                    )}
+                </div>
+
 
                 {this.state.fireRedirect && (
                     <Redirect to={`/polls/poll/${this.state.pollId}`} />

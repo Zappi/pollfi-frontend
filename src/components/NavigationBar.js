@@ -7,7 +7,7 @@ class NavigationBar extends Component {
         return (
             <nav className='nav-bar'>
                 <div className='nav-logo'>
-                    <h2> Quizfi </h2>
+                    <h2> POLLFI </h2>
                     <div className='nav-links'>
                         <ul>
                             <li>

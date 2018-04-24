@@ -1,23 +1,23 @@
 import axios from 'axios'
-import tokenService from './token'
+import TokenService from './token'
 
 const baseUrl = 'http://fathomless-sands-25342.herokuapp.com/api/polls'
 
 const getAll = async () => {
-    const response = await axios.get(baseUrl)
-    return response.data
+    const res = await axios.get(baseUrl)
+    return res.data
 }
 
 const getSinglePoll = async (id) => {
-    const response = await axios.get(`${baseUrl}/poll/${id}`)
-    return response.data
+    const res = await axios.get(`${baseUrl}/poll/${id}`)
+    return res.data
 }
 
-const getPollFormAuth = async() => {
+const getPollFormAuth = async () => {
 
     const config = {
         headers: {
-            'Authorization': tokenService.getToken()
+            'Authorization': TokenService.getToken()
         }
     }
 
@@ -28,15 +28,25 @@ const getPollFormAuth = async() => {
 
 
 const create = async (newPoll) => {
-    console.log(tokenService.getToken())
     const config = {
         headers: {
-            'Authorization': tokenService.getToken()
+            'Authorization': TokenService.getToken()
         }
     }
 
     const res = await axios.post(baseUrl, newPoll, config)
- 
+
+    return res.data
+}
+
+const vote = async (votedPoll) => {
+    const config = {
+        headers: {
+            'Authorization': TokenService.getToken()
+        }
+    }
+
+    const res = await axios.put(`${baseUrl}/poll/${votedPoll._id}`, votedPoll, config)
     return res.data
 }
 
@@ -44,4 +54,4 @@ const remove = async (id) => {
     return await axios.delete(`${baseUrl}/poll/${id}`)
 }
 
-export default {getAll, getSinglePoll, getPollFormAuth, create, remove}
+export default { getAll, getSinglePoll, getPollFormAuth, create, vote, remove }

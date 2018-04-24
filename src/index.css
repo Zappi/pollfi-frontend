@@ -1,14 +1,9 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Lato', sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
-.listed-poll {
-  border-style: solid;
-  padding: 10px;
-  margin-top: 5px;
-}
 
 .keepAtSameRow {
   display: inline-block;
@@ -40,3 +35,17 @@ body {
 }
 
 /*Navbar styling ends */
+
+
+/*Single poll styling */
+
+.singlePollQuestion {
+  text-align: center;
+}
+
+/*Single polls styling ends*/
+
+
+.listedPollCard {
+  padding: 5px 0px;
+}
