@@ -1,34 +1,48 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
+import styled from 'styled-components'
 
 class NavigationBar extends Component {
 
     render() {
+
+        const linkStyles = {
+            color: 'white',
+            textDecoration: 'none'
+        }
+
+
+
         return (
-            <nav className='nav-bar'>
-                <div className='nav-logo'>
-                    <h2> POLLFI </h2>
+            <div className='container' >
+                <nav className='nav-bar'>
+                    <div className='nav-logo' style={{display: 'inline'}}>
+                        <h2> POLLFI </h2>
+                    </div>
                     <div className='nav-links'>
                         <ul>
                             <li>
-                                <NavLink to='/'> Home </NavLink>
+                                <NavLink to='/' style={linkStyles}> Home </NavLink>
                             </li>
                             <li>
-                                <NavLink to='/polls'> Polls </NavLink>
+                                <NavLink to='/polls' style={linkStyles}> Polls </NavLink>
                             </li>
                             {!this.props.isLoggedIn ? (
-                                <li>  <NavLink to='/login'> Log in </NavLink> </li>
+                                <span className="nav-links-user-not-logged-in">
+                                    <li>  <NavLink to='/' style={linkStyles}> Register </NavLink> </li>
+                                    <li>  <NavLink to='/login' style={linkStyles}> Log in </NavLink> </li>
+                                </span>
                             ) : (
                                     <span>
-                                        <li> <NavLink to='/polls/newpoll'> Create a poll </NavLink> </li>
-                                        <li> <NavLink to='/profile'> Profile </NavLink> </li>
-                                        <li> <NavLink to='/logout' onClick={this.props.logout}> Log out </NavLink> </li>
+                                        <li> <NavLink to='/polls/newpoll' style={linkStyles}> Create a poll </NavLink> </li>
+                                        <li> <NavLink to='/profile' style={linkStyles}> Profile </NavLink> </li>
+                                        <li> <NavLink to='/logout' onClick={this.props.logout} style={linkStyles}> Log out </NavLink> </li>
                                     </span>
                                 )}
                         </ul>
                     </div>
-                </div>
-            </nav>
+                </nav>
+            </div >
         )
     }
 }

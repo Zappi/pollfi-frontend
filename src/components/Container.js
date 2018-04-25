@@ -10,7 +10,7 @@ const Container = (props) => {
 
     return (
 
-        <div>
+        <div className='container'>
             <Route exact path='/' render={() => 'Home'} />
             <Route exact path='/polls' render={() => <Polls />} />
             <Route exact path='/polls/newpoll' render={() => <PollFrom />} />

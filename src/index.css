@@ -11,28 +11,57 @@ body {
 
 .nav-bar {
   padding: 50px;
+  background-color: hsl(171, 100%, 41%);
 }
 
+
 .nav-logo h2 {
-  display: inline;
+  display: inline !important;
+  color: white;
 }
 
 .nav-links {
-  list-style: none;
-  float:right;
+  float: right;
   margin-top: 5px;
   font-size: 20px
 }
 
 .nav-links li {
-  display: block;
-  float: left;
-  list-style: none;
-  padding: 0 10px;
-  text-decoration: none !important;
+  display: inline;
+  padding-right: 5px;
+}
+
+.nav-links > li:hover {
+  color: red;
 }
 
 /*Navbar styling ends */
+
+/*Pollform styling */
+
+.option-input {
+  position: relative;
+}
+
+.option-input-text {
+  width: 97%;
+  margin-bottom: 5px;
+}
+
+.option-delete-button {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  z-index: 1;
+}
+
+.add-new-poll-button {
+  margin-right: 5px;
+}
+
+/*Pollform styling ends */
+
+
 
 
 /*Single poll styling */

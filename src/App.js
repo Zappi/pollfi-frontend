@@ -54,7 +54,7 @@ class App extends Component {
       <MuiThemeProvider>
         <div className='container'>
           <Router >
-            <div>
+            <div className='nav-bar-background'>
               <NavigationBar isLoggedIn={this.state.loggedIn} logout={this.logout} />
               <Container handleLogin={this.handleLogin} />
             </div>

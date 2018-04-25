@@ -3,7 +3,6 @@ import PollService from '../services/polls'
 import PollOption from './PollOption'
 
 import Snackbar from 'material-ui/Snackbar'
-import RaisedButton from 'material-ui/RaisedButton'
 import { BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Bar } from 'recharts'
 
 class PollElement extends Component {
@@ -88,7 +87,7 @@ class PollElement extends Component {
                         <BarChart width={730} height={250} data={optionsWithoutId}>
                             <CartesianGrid strokeDasharray="3 3" />
                             <XAxis dataKey="option" />
-                            <YAxis dataKey="Upvotes"/>
+                            <YAxis dataKey="Upvotes" />
                             <Tooltip />
                             <Legend />
                             <Bar dataKey="Upvotes" fill="#8884d8" />
@@ -110,7 +109,6 @@ class PollElement extends Component {
                         open={this.state.openSnackbar}
                         message={this.state.snackbarMessage}
                         autoHideDuration={4000}
-                        onRequestClose={this.cancelVote}
                     />
                 </div>
 
