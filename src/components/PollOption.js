@@ -4,11 +4,13 @@ const PollOption = (props) => {
 
 
     return (
-        <div>
+        <div className='pollOption'>
             <div>
-                <h3> {props.optionData.option} </h3>
                 <a onClick={() => props.handleVote()} className="button is-primary is-outlined">Vote</a>
-                <p> Votes: {props.optionData.upvotes} </p>
+                <div className='pollOptionAndVotes'>
+                    <h3 className='singlePollOption'> {props.optionData.option} </h3>
+                    <p className='givenVotes'> Votes: {props.optionData.upvotes} </p>
+                </div>
             </div>
         </div>
     )

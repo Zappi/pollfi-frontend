@@ -11,6 +11,7 @@ class Polls extends Component {
             fireRedirect: false,
             pollId: ''
         }
+        this.removePoll = this.removePoll.bind(this)
     }
 
     async componentDidMount() {
@@ -30,12 +31,16 @@ class Polls extends Component {
         })
     }
 
-    removePoll(id) {
-        console.log(`poll ${id} removed`)
-        pollService.remove(id)
+    async removePoll(id) {
+        await pollService.remove(id)
+        this.setState({
+            polls: this.state.polls.filter(poll => poll.id !== id)
+        })
+
+
     }
 
-
+    /*Lists all the polls in path /polls as ListedPollCard which are created by using material-ui cards*/
     render() {
         return (
             <div>
