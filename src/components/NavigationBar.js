@@ -29,7 +29,7 @@ class NavigationBar extends Component {
                             </li>
                             {!this.props.isLoggedIn ? (
                                 <span className="nav-links-user-not-logged-in">
-                                    <li>  <NavLink to='/' style={linkStyles}> Register </NavLink> </li>
+                                    <li>  <NavLink to='/register' style={linkStyles}> Register </NavLink> </li>
                                     <li>  <NavLink to='/login' style={linkStyles}> Log in </NavLink> </li>
                                 </span>
                             ) : (

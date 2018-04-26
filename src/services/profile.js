@@ -10,7 +10,6 @@ const getProfile = async () => {
         }
     }
     const res = await axios.get(`${baseUrl}/profile`, config)
-    console.log(res.data)
     return res.data
 
 }

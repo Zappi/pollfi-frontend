@@ -23,7 +23,6 @@ class PollForm extends Component {
 
         let invalidOptions = []
         this.state.options.map((option) => {
-            console.log(option)
             if (option.option.length === 0 || option.option.length > 70) {
                 invalidOptions.push(false)
             }
@@ -40,7 +39,6 @@ class PollForm extends Component {
         this.setState({
             question: e.target.value
         })
-        console.log(this.state)
     }
 
     handleShareholderName = (idx) => (e) => {
@@ -83,8 +81,9 @@ class PollForm extends Component {
             <div className='control is-two-thirds'>
                 <form onSubmit={this.handleSubmit} className='poll-form'>
                     <h2> Create New Poll </h2>
-                    
+
                     <div className='field'>
+                        <h5> Question </h5>
                         <input
                             className='input is-primary'
                             type='text'
@@ -94,23 +93,23 @@ class PollForm extends Component {
                         />
                     </div>
 
-
+                    <h5> Options </h5>
                     {this.state.options.map((shareholder, idx) => (
                         <div key={idx}>
-                            
                             <div className='shareholder option-input'>
                                 <div className='option-input-text'>
-                                <input
-                                    className='input is-primary option-input-text'
-                                    type='text'
-                                    placeholder={`Add option (max. 70 characters)`}
-                                    value={shareholder.name}
-                                    onChange={this.handleShareholderName(idx)}
-                                />
+
+                                    <input
+                                        className='input is-primary option-input-text'
+                                        type='text'
+                                        placeholder={`Add option (max. 70 characters)`}
+                                        value={shareholder.name}
+                                        onChange={this.handleShareholderName(idx)}
+                                    />
                                 </div>
                                 <button className='button is-danger option-delete-button' type="button" onClick={this.handleRemoveShareholder(idx)}>x</button>
                             </div>
-    
+
                         </div>
                     ))}
 
@@ -119,16 +118,16 @@ class PollForm extends Component {
                             Add new option!
                     </button>
                     ) : (
-                        <button type='button' onClick={this.addShareHolder} className='button is-info' disabled>
-                        Add new option!
+                            <button type='button' onClick={this.addShareHolder} className='button is-info' disabled>
+                                Add new option!
                     </button>
-                    )}
+                        )}
 
                     {this.state.options.length > 1 ? (
                         <button className='button is-primary'> Save! </button>
-                    ): (
-                        <button className='button is-primary' disabled> Save! </button>
-                    )}
+                    ) : (
+                            <button className='button is-primary' disabled> Save! </button>
+                        )}
 
                 </form>
 

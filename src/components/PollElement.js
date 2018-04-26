@@ -84,8 +84,7 @@ class PollElement extends Component {
 
                     {dataFetched && this.state.voted ? (
 
-                        <BarChart width={730} height={250} data={optionsWithoutId}>
-                            <CartesianGrid strokeDasharray="3 3" />
+                        <BarChart width={730} height={250} data={optionsWithoutId}>    
                             <XAxis dataKey="option" />
                             <YAxis dataKey="Upvotes" />
                             <Tooltip />
