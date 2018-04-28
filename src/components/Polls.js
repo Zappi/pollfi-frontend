@@ -3,11 +3,13 @@ import ListedPollCard from './ListedPollCard'
 import pollService from '../services/polls'
 import { Redirect } from 'react-router-dom'
 
+import { connect } from 'react-redux'
+import { fetchPolls, removePoll } from '../reducers/pollReducer'
+
 class Polls extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            polls: [],
             fireRedirect: false,
             pollId: ''
         }
@@ -15,10 +17,7 @@ class Polls extends Component {
     }
 
     async componentDidMount() {
-        const polls = await pollService.getAll()
-        this.setState({
-            polls
-        })
+       await this.props.fetchPolls()
 
     }
 
@@ -31,13 +30,8 @@ class Polls extends Component {
         })
     }
 
-    async removePoll(id) {
-        await pollService.remove(id)
-        this.setState({
-            polls: this.state.polls.filter(poll => poll.id !== id)
-        })
-
-
+    async removePoll(poll) {
+        await this.props.removePoll(poll)
     }
 
     /*Lists all the polls in path /polls as ListedPollCard which are created by using material-ui cards*/
@@ -45,8 +39,8 @@ class Polls extends Component {
         return (
             <div>
                 <div>
-                    {this.state.polls.map(poll =>
-                        <ListedPollCard key={poll.id} data={poll} clickRemovePoll={() => this.removePoll(poll.id)} clickToOpen={() => this.handleClick(poll.id)} />
+                    {this.props.polls.map(poll =>
+                        <ListedPollCard key={poll.id} data={poll} clickRemovePoll={() => this.removePoll(poll)} clickToOpen={() => this.handleClick(poll.id)} />
                     )}
                 </div>
 
@@ -60,4 +54,20 @@ class Polls extends Component {
     }
 }
 
-export default Polls;
+const mapStateToProps = (state) => {
+    return {
+        polls: state.polls
+    }
+}
+
+const mapDispatchToProps = {
+    fetchPolls,
+    removePoll
+}
+
+
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Polls);

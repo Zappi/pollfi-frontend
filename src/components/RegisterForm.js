@@ -57,7 +57,6 @@ class RegisterForm extends Component {
         UserService
             .register(this.state)
             .then(user => {
-                console.log(user)
                 this.loginNewUser(user.data, realPassword)
             })
             .catch(error => {

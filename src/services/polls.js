@@ -1,7 +1,7 @@
 import axios from 'axios'
 import TokenService from './token'
 
-const baseUrl = 'http://fathomless-sands-25342.herokuapp.com/api/polls'
+const baseUrl = '/api/polls'
 
 const getAll = async () => {
     const res = await axios.get(baseUrl)
@@ -50,8 +50,15 @@ const vote = async (votedPoll) => {
     return res.data
 }
 
-const remove = async (id) => {
-    return await axios.delete(`${baseUrl}/poll/${id}`)
+const remove = async (pollId, pollUser) => {
+    console.log(pollUser._id)
+    const config = {
+        headers: {
+            'Authorization': TokenService.getToken(),
+            'UserID': pollUser._id
+        }
+    }
+    return await axios.delete(`${baseUrl}/poll/${pollId}`, config)
 }
 
 export default { getAll, getSinglePoll, getPollFormAuth, create, vote, remove }

@@ -1,6 +1,6 @@
 import axios from 'axios'
 import tokenService from './token'
-const baseUrl = 'http://fathomless-sands-25342.herokuapp.com/api/authenticate'
+const baseUrl = '/api/authenticate'
 
 const getProfile = async () => {
 
