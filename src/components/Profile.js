@@ -15,11 +15,16 @@ class Profile extends Component {
             user: user.payload
         })
     }
-    
+
     render() {
+        console.log(this.state.user)
+        console.log(this.state.user.polls)
+
         return (
             <div>
                 <h4> Hello {this.state.user.name} </h4>
+
+                <h5> You have created  polls </h5>
             </div>
         )
     }

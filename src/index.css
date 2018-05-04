@@ -10,7 +10,7 @@ body {
 /*Navbar styling */
 
 .nav-bar {
-  padding: 50px;
+  padding: 40px 20px;
   background-color: hsl(171, 100%, 41%);
 }
 
@@ -66,12 +66,21 @@ body {
 
 /*Single poll styling */
 
-.singlePollQuestion {
+.single-poll-question {
   text-align: center;
   padding-bottom: 20px;
 }
 
-.singlePollOption {
+.polloption-and-votes {
+  display: inline;
+  margin-left: 3%;
+}
+
+.polloption-and-votes-not-authentiacted {
+  margin-left: 3%;
+}
+
+.single-poll-option {
   display: inline;
   padding: 0 10px;
   margin-right: 10px;
@@ -81,12 +90,14 @@ body {
   padding-left:30px;
 }
 
-.pollOptionAndVotes {
-  display: inline;
-  margin-left: 3%;
-}
 
-.givenVotes {
+.poll-vote-login-text {
+  text-align: left;
+  margin-top: -30px;
+  margin-bottom: 20px
+  }
+
+.given-votes {
   padding-left: 80px;
   margin-left: 3%;
 }
@@ -101,3 +112,4 @@ body {
 .listedPollCard {
   padding: 5px 0px;
 }
+

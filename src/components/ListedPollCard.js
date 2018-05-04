@@ -7,10 +7,6 @@ import profileService from '../services/profile'
 
 const ListedPollCard = (props) => {
 
-    const editPoll = (id) => {
-        console.log("POLL EDITED")
-    }
-
     const profileId = () => {
         const foundProfile = profileService.getUserFromLocalStorage()
 

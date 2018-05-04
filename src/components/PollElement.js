@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import PollService from '../services/polls'
 import PollOption from './PollOption'
+import ProfileService from '../services/profile'
 
+import {Link} from 'react-router-dom'
 import Snackbar from 'material-ui/Snackbar'
-import { BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Bar } from 'recharts'
+import { BarChart, XAxis, YAxis, Tooltip, Legend, Bar } from 'recharts'
 
 class PollElement extends Component {
     constructor() {
@@ -14,7 +16,7 @@ class PollElement extends Component {
             dataFetched: false,
             snackbarMessage: '',
             openSnackbar: false,
-            voted: false
+            voted: false,
         }
 
         this.handleVote = this.handleVote.bind(this)
@@ -58,11 +60,23 @@ class PollElement extends Component {
             })
         }
 
+        let authenticated = false
+
+        if (ProfileService.getUserFromLocalStorage() != null) {
+            authenticated = true
+        }
+
         return (
 
             <div>
-                <div className='singlePollQuestion'>
+                <div className='single-poll-question'>
                     <h2> {this.state.poll.question} </h2>
+                </div>
+
+                <div className='poll-vote-login-text'>
+                    {authenticated ? 
+                        '' : 
+                        <Link to={'/login'} style={{textDecoration: 'none', color: 'hsl(171, 100%, 41%)'}}>Log in to vote</Link>}
                 </div>
 
                 <div className='listedPollOptions'>
@@ -70,7 +84,7 @@ class PollElement extends Component {
 
 
                         this.state.poll.options.map((optionData) => {
-                            { return <PollOption key={optionData._id} optionData={optionData} handleVote={() => this.handleVote(optionData)} /> }
+                            { return <PollOption key={optionData._id} authenticated={authenticated} optionData={optionData} handleVote={() => this.handleVote(optionData)} /> }
 
                         })
 
@@ -84,7 +98,7 @@ class PollElement extends Component {
 
                     {dataFetched && this.state.voted ? (
 
-                        <BarChart width={730} height={250} data={optionsWithoutId}>    
+                        <BarChart width={730} height={250} data={optionsWithoutId}>
                             <XAxis dataKey="option" />
                             <YAxis dataKey="Upvotes" />
                             <Tooltip />

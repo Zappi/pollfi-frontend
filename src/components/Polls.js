@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import ListedPollCard from './ListedPollCard'
-import pollService from '../services/polls'
 import { Redirect } from 'react-router-dom'
 
 import { connect } from 'react-redux'
@@ -20,8 +19,6 @@ class Polls extends Component {
        await this.props.fetchPolls()
 
     }
-
-
 
     handleClick(id) {
         this.setState({

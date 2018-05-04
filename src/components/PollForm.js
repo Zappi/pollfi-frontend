@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router'
 import pollService from '../services/polls'
-import Polls from './Polls'
 import Snackbar from 'material-ui/Snackbar'
 
 class PollForm extends Component {
