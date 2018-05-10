@@ -56,7 +56,9 @@ class App extends Component {
           <Router >
             <div className='nav-bar-background'>
               <NavigationBar isLoggedIn={this.state.loggedIn} logout={this.logout} />
-              <Container handleLogin={this.handleLogin} />
+              <div className='container-fluid'>
+                <Container handleLogin={this.handleLogin} />
+              </div>
             </div>
           </Router>
 

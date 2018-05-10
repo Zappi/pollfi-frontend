@@ -9,21 +9,26 @@ body {
 
 /*Navbar styling */
 
-.nav-bar {
-  padding: 40px 20px;
+.nav-bar { 
+  padding-bottom: 80px;
   background-color: hsl(171, 100%, 41%);
 }
 
-
 .nav-logo h2 {
   display: inline !important;
+  position: relative;
+  top: 35px;
+  left: 10px;
+  padding-left: 30px;
   color: white;
 }
 
+
 .nav-links {
   float: right;
-  margin-top: 5px;
-  font-size: 20px
+  margin-top: 35px;
+  font-size: 20px;
+  padding-right: 50px;
 }
 
 .nav-links li {
@@ -62,6 +67,60 @@ body {
 /*Pollform styling ends */
 
 
+/*Burgermenu styling*/
+
+.bm-burger-button {
+  position: fixed;
+  width: 36px;
+  height: 30px;
+  top: 40px;
+  right: 40px;
+}
+
+.bm-burger-bars {
+  background: white;
+}
+
+.bm-cross-button {
+  position: fixed;
+  height: 24px;
+  width: 24px;
+}
+
+.bm-cross {
+  background: #bdc3c7;
+  height: 100%;
+  top: 30;
+}
+
+.bm-menu {
+  position: fixed;
+  top: 0;
+  height: 100%;
+  background: #a6a7a8;
+  padding: 10px 100px;
+  font-size: 1.50em;
+  opacity: 0.8;
+  right: 1;
+  width: 100%;
+}
+
+.bm-menu-wrap {
+  top: 0;
+}
+
+.bm-item-list {
+  position: fixed;
+  color: #b8b7ad;
+  padding: 50px 0px 0 0;
+  width: 100%;
+}
+
+.bm-overlay {
+  position: fixed;
+  top: 0;
+  right:0;
+}
 
 
 /*Single poll styling */

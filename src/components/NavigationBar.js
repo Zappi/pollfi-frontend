@@ -25,10 +25,12 @@ class NavigationBar extends Component {
         return (
             <nav className='nav-bar'>
                 <div className='nav-logo' style={{ display: 'inline' }}>
-                    <h2> POLLFI </h2>
+                    <h2>
+                        <NavLink to={'/'} style={linkStyles}> POLLFI </NavLink>
+                    </h2>
                 </div>
 
-                <Media query="(min-width: 600px)">
+                <Media query="(min-width: 770px)">
                     {matches =>
                         matches ? (
                             <div className='nav-links'>
@@ -48,14 +50,14 @@ class NavigationBar extends Component {
                                             <span>
                                                 <li> <NavLink to='/polls/newpoll' style={linkStyles}> Create a poll </NavLink> </li>
                                                 <li> <NavLink to='/profile' style={linkStyles}> Profile </NavLink> </li>
-                                                <li> <NavLink to='/logout' onClick={this.props.logout} style={linkStyles}> Log out </NavLink> </li>
+                                                <li> <NavLink to='/' onClick={this.props.logout} style={linkStyles}> Log out </NavLink> </li>
                                             </span>
                                         )}
                                 </ul>
                             </div>
 
                         ) : (
-                            <SideBar isLoggedIn={this.props.isLoggedIn}/>
+                                <SideBar isLoggedIn={this.props.isLoggedIn} logout={this.props.logout} />
                             )
                     }
                 </Media>

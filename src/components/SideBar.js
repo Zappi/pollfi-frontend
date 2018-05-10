@@ -2,41 +2,59 @@ import React, { Component } from 'react'
 import { slide as Menu } from 'react-burger-menu'
 import { NavLink } from 'react-router-dom'
 
-const SideBar = (props) => {
-    const linkStyles = {
-        color: 'white',
-        textDecoration: 'none'
+class SideBar extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            menuOpen: false
+        }
     }
 
-    return (
+    handleStateChange(state) {
+        this.setState({menuOpen: state.isOpen})
+    }
+
+    closeMenu() {
+        this.setState({menuOpen: false})
+    }
 
 
-        <button>
-            <Menu>
-                <ul>
-                    <li>
-                        <NavLink to='/' style={linkStyles}> Home </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to='/polls' style={linkStyles}> Polls </NavLink>
-                    </li>
-                    {!props.isLoggedIn ? (
-                        <span className="nav-links-user-not-logged-in">
-                            <li>  <NavLink to='/register' style={linkStyles}> Register </NavLink> </li>
-                            <li>  <NavLink to='/login' style={linkStyles}> Log in </NavLink> </li>
-                        </span>
-                    ) : (
-                            <span>
-                                <li> <NavLink to='/polls/newpoll' style={linkStyles}> Create a poll </NavLink> </li>
-                                <li> <NavLink to='/profile' style={linkStyles}> Profile </NavLink> </li>
-                                <li> <NavLink to='/logout' onClick={this.props.logout} style={linkStyles}> Log out </NavLink> </li>
+    render() {
+
+        const linkStyles = {
+            color: 'white',
+            textDecoration: 'none'
+        }
+
+        return (
+            <div>
+                <Menu right
+                    isOpen={this.state.menuOpen}
+                    onStateChange={(state) => this.handleStateChange(state)} >
+                    <ul>
+                        <li onClick={() => this.closeMenu()}>
+                            <NavLink to='/' style={linkStyles}> Home </NavLink>
+                        </li>
+                        <li onClick={() => this.closeMenu()}>
+                            <NavLink to='/polls' style={linkStyles}> Polls </NavLink>
+                        </li>
+                        {!this.props.isLoggedIn ? (
+                            <span className="nav-links-user-not-logged-in">
+                                <li onClick={() => this.closeMenu()}>  <NavLink to='/register' style={linkStyles}> Register </NavLink> </li>
+                                <li onClick={() => this.closeMenu()}>  <NavLink to='/login' style={linkStyles}> Log in </NavLink> </li>
                             </span>
-                        )}
-                </ul>
-            </Menu>
-        </button>
-
-    );
+                        ) : (
+                                <span>
+                                    <li onClick={() => this.closeMenu()}> <NavLink to='/polls/newpoll' style={linkStyles}> Create a poll </NavLink> </li>
+                                    <li onClick={() => this.closeMenu()}> <NavLink to='/profile' style={linkStyles}> Profile </NavLink> </li>
+                                    <li onClick={() => this.closeMenu()}> <NavLink to='/' onClick={this.props.logout} style={linkStyles}> Log out </NavLink> </li>
+                                </span>
+                            )}
+                    </ul>
+                </Menu >
+            </div>
+        )
+    }
 };
 
 export default SideBar;
