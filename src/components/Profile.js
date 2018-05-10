@@ -1,33 +1,43 @@
 import React, { Component } from 'react'
 import profileService from '../services/profile';
 
+
+import { connect } from 'react-redux'
+import { fetchProfile } from '../reducers/profileReducer'
+
 class Profile extends Component {
     constructor(props) {
         super(props)
-        this.state = {
-            user: []
-        }
+
     }
 
     async componentDidMount() {
-        const user = await profileService.getProfile()
-        this.setState({
-            user: user.payload
-        })
+        this.props.fetchProfile()
     }
 
     render() {
-        console.log(this.state.user)
-        console.log(this.state.user.polls)
-
         return (
             <div>
-                <h4> Hello {this.state.user.name} </h4>
-
+                <h4> Hello {this.props.profile.username} </h4>
                 <h5> You have created  polls </h5>
             </div>
         )
     }
 }
 
-export default Profile
+
+const mapStateToProps = (state) => {
+    return {
+        profile: state.profile
+    }
+}
+
+const mapDispatchToProps = {
+    fetchProfile
+}
+
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Profile);

@@ -3,16 +3,17 @@ import PollService from '../services/polls'
 import PollOption from './PollOption'
 import ProfileService from '../services/profile'
 
-import {Link} from 'react-router-dom'
+import { connect } from 'react-redux'
+import { fetchSinglePoll } from '../reducers/pollElementReducer'
+
+import { Link } from 'react-router-dom'
 import Snackbar from 'material-ui/Snackbar'
 import { BarChart, XAxis, YAxis, Tooltip, Legend, Bar } from 'recharts'
 
 class PollElement extends Component {
-    constructor() {
-        super()
-
+    constructor(props) {
+        super(props)
         this.state = {
-            poll: [],
             dataFetched: false,
             snackbarMessage: '',
             openSnackbar: false,
@@ -23,23 +24,19 @@ class PollElement extends Component {
     }
 
     async componentDidMount() {
-        await PollService.getSinglePoll(this.props.pollId).then(poll => this.setState({
-            poll
-        }))
-
+        await this.props.fetchSinglePoll(this.props.pollId)
+        console.log(this.props)
         this.setState({ dataFetched: true })
     }
 
     async componentWillMount() {
-        await PollService.getSinglePoll(this.props.pollId).then(poll => this.setState({
-            poll
-        }))
+        await this.props.fetchSinglePoll(this.props.pollId)    
     }
 
     async handleVote(optionData) {
-        const upVotedOption = this.state.poll.options.filter((value) => value._id === optionData._id)
+        const upVotedOption = this.props.pollElement.options.filter((value) => value._id === optionData._id)
         upVotedOption[0].upvotes++
-        await PollService.vote(this.state.poll)
+        await PollService.vote(this.props.pollElement)
 
         this.setState({
             openSnackbar: true,
@@ -55,7 +52,7 @@ class PollElement extends Component {
         const optionsWithoutId = []
 
         if (dataFetched) {
-            const optionsWithId = this.state.poll.options.map((poll) => {
+            const optionsWithId = this.props.pollElement.options.map((poll) => {
                 optionsWithoutId.push({ option: poll.option, Upvotes: poll.upvotes })
             })
         }
@@ -70,20 +67,20 @@ class PollElement extends Component {
 
             <div>
                 <div className='single-poll-question'>
-                    <h2> {this.state.poll.question} </h2>
+                    <h2> {this.props.pollElement.question} </h2>
                 </div>
 
                 <div className='poll-vote-login-text'>
-                    {authenticated ? 
-                        '' : 
-                        <Link to={'/login'} style={{textDecoration: 'none', color: 'hsl(171, 100%, 41%)'}}>Log in to vote</Link>}
+                    {authenticated ?
+                        '' :
+                        <Link to={'/login'} style={{ textDecoration: 'none', color: 'hsl(171, 100%, 41%)' }}>Log in to vote</Link>}
                 </div>
 
                 <div className='listedPollOptions'>
                     {dataFetched && !this.state.voted ? (
 
 
-                        this.state.poll.options.map((optionData) => {
+                        this.props.pollElement.options.map((optionData) => {
                             { return <PollOption key={optionData._id} authenticated={authenticated} optionData={optionData} handleVote={() => this.handleVote(optionData)} /> }
 
                         })
@@ -94,7 +91,7 @@ class PollElement extends Component {
 
                 </div>
 
-                <div className='pollBarChart'>
+                <div className='pollBarChart container'>
 
                     {dataFetched && this.state.voted ? (
 
@@ -131,4 +128,18 @@ class PollElement extends Component {
     }
 }
 
-export default PollElement
+const mapStateToProps = (state) => {
+    console.log(state)
+    return {
+        pollElement: state.pollElement
+    }
+}
+
+const mapDispatchToProps = {
+    fetchSinglePoll
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(PollElement);

@@ -8,10 +8,14 @@ import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 
 import pollReducer from './reducers/pollReducer'
+import profileReducer from './reducers/profileReducer'
+import pollElementReducer from './reducers/pollElementReducer'
 
 
 const reducer = combineReducers({
-    polls: pollReducer
+    polls: pollReducer,
+    profile: profileReducer,
+    pollElement: pollElementReducer
 })
 
 /*Create own file for store */
