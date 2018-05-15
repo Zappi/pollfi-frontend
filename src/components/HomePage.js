@@ -1,23 +1,15 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-class HomePage extends Component {
-    constructor() {
-        super()
 
-        this.state = {
+const HomePage = () => {
 
-        }
-    }
-
-    render() {
-        return (
+    return (
+        <div>
             <div>
-                <div>
-                    <h4> Create easily your very own polls </h4>
-                </div>
+                <h4> Create easily your very own polls and get other users opinions </h4>
             </div>
-        )
-    }
+        </div>
+    )
 }
 
 export default HomePage

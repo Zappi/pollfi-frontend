@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { slide as Menu } from 'react-burger-menu'
 import { NavLink } from 'react-router-dom'
 
-class SideBar extends React.Component {
+class SideBar extends Component {
     constructor(props) {
         super(props)
         this.state = {

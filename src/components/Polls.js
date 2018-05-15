@@ -8,6 +8,8 @@ import { fetchPolls, removePoll } from '../reducers/pollReducer'
 class Polls extends Component {
     constructor(props) {
         super(props)
+
+        /*Todo remove state and move to reducer */
         this.state = {
             fireRedirect: false,
             pollId: ''
@@ -15,6 +17,7 @@ class Polls extends Component {
         this.removePoll = this.removePoll.bind(this)
     }
 
+    /*Fetches polls with reducer */
     async componentDidMount() {
        await this.props.fetchPolls()
 

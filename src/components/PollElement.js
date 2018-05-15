@@ -4,7 +4,7 @@ import PollOption from './PollOption'
 import ProfileService from '../services/profile'
 
 import { connect } from 'react-redux'
-import { fetchSinglePoll } from '../reducers/pollElementReducer'
+import { fetchSinglePoll, setSnackbarMessage, setPollVoted } from '../reducers/pollElementReducer'
 
 import { Link } from 'react-router-dom'
 import Snackbar from 'material-ui/Snackbar'
@@ -13,45 +13,34 @@ import { BarChart, XAxis, YAxis, Tooltip, Legend, Bar } from 'recharts'
 class PollElement extends Component {
     constructor(props) {
         super(props)
-        this.state = {
-            dataFetched: false,
-            snackbarMessage: '',
-            openSnackbar: false,
-            voted: false,
-        }
-
         this.handleVote = this.handleVote.bind(this)
     }
 
     async componentDidMount() {
         await this.props.fetchSinglePoll(this.props.pollId)
-        console.log(this.props)
-        this.setState({ dataFetched: true })
+
     }
 
     async componentWillMount() {
-        await this.props.fetchSinglePoll(this.props.pollId)    
+        await this.props.fetchSinglePoll(this.props.pollId)
     }
 
     async handleVote(optionData) {
         const upVotedOption = this.props.pollElement.options.filter((value) => value._id === optionData._id)
         upVotedOption[0].upvotes++
+
         await PollService.vote(this.props.pollElement)
 
-        this.setState({
-            openSnackbar: true,
-            snackbarMessage: "You have voted " + upVotedOption[0].option,
-            voted: true
-        })
+        /*Handles the reducer for voted poll */
+        await this.props.setPollVoted()
+        await this.props.setSnackbarMessage("You have voted " + upVotedOption[0].option)
     }
 
 
     render() {
-        const dataFetched = this.state.dataFetched
-
         const optionsWithoutId = []
 
-        if (dataFetched) {
+        if (this.props.dataFetched) {
             const optionsWithId = this.props.pollElement.options.map((poll) => {
                 optionsWithoutId.push({ option: poll.option, Upvotes: poll.upvotes })
             })
@@ -77,7 +66,7 @@ class PollElement extends Component {
                 </div>
 
                 <div className='listedPollOptions'>
-                    {dataFetched && !this.state.voted ? (
+                    {this.props.dataFetched && !this.props.voted ? (
 
 
                         this.props.pollElement.options.map((optionData) => {
@@ -93,7 +82,7 @@ class PollElement extends Component {
 
                 <div className='pollBarChart container'>
 
-                    {dataFetched && this.state.voted ? (
+                    {this.props.dataFetched && this.props.voted ? (
 
                         <BarChart width={730} height={250} data={optionsWithoutId}>
                             <XAxis dataKey="option" />
@@ -102,26 +91,18 @@ class PollElement extends Component {
                             <Legend />
                             <Bar dataKey="Upvotes" fill="#8884d8" />
                         </BarChart>
-
-
-
-
                     ) : (
                             <div> </div>
                         )}
 
-
                 </div>
-
-
                 <div>
                     <Snackbar
-                        open={this.state.openSnackbar}
-                        message={this.state.snackbarMessage}
+                        open={this.props.openSnackbar}
+                        message={this.props.snackbarMessage}
                         autoHideDuration={4000}
                     />
                 </div>
-
             </div >
 
         )
@@ -129,14 +110,19 @@ class PollElement extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state)
     return {
-        pollElement: state.pollElement
+        pollElement: state.pollElement.poll,
+        dataFetched: state.pollElement.dataFetched,
+        snackbarMessage: state.pollElement.snackbarMessage,
+        openSnackbar: state.pollElement.openSnackbar,
+        voted: state.pollElement.voted
     }
 }
 
 const mapDispatchToProps = {
-    fetchSinglePoll
+    fetchSinglePoll,
+    setSnackbarMessage,
+    setPollVoted
 }
 
 export default connect(

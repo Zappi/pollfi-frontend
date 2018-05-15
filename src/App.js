@@ -3,6 +3,7 @@ import NavigationBar from './components/NavigationBar'
 import Container from './components/Container'
 import { BrowserRouter as Router, Redirect } from 'react-router-dom'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import ProfileService from './services/profile'
 
 class App extends Component {
   constructor(props) {
@@ -11,11 +12,14 @@ class App extends Component {
       loggedIn: false,
       fireRedirect: false
     }
-
   }
 
   componentDidMount() {
-    if (window.localStorage.getItem('loggedUser') != null) {
+    this.checkIfUserIsLoggedIn()
+  }
+
+  checkIfUserIsLoggedIn = () => {
+    if (ProfileService.getUserFromLocalStorage() != null) {
       this.setState({
         loggedIn: true
       })
@@ -24,7 +28,6 @@ class App extends Component {
         loggedIn: false
       })
     }
-
   }
 
   handleLogin = () => {
@@ -40,11 +43,9 @@ class App extends Component {
     })
     window.localStorage.clear()
 
-    {
-      this.state.fireRedirect && (
-        <Redirect to='/' />)
+    if (this.state.fireRedirect) {
+      <Redirect to='/' />
     }
-
   }
 
 

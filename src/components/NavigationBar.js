@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
-import { Nav, NavItem, Navbar, Button } from 'react-bootstrap'
-import { LinkContainer } from 'react-router-bootstrap'
 import Media from "react-media";
-import { slide as Menu } from 'react-burger-menu'
 import SideBar from './SideBar';
 
 class NavigationBar extends Component {

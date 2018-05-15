@@ -1,13 +1,18 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import loginService from '../services/login'
 import { Redirect } from 'react-router'
+import PropTypes from 'prop-types'
+import Dialog from 'material-ui/Dialog'
+import { connect } from 'react-redux'
+import FlatButton from 'material-ui/FlatButton'
+import { fireRedirect, showDialogWarning, hideDialogWarning } from '../reducers/loginReducer'
 
 class LoginForm extends Component {
+    static propTypes = {
+        handleSubmit: PropTypes.func.isRequired
+    }
     constructor() {
         super()
-        this.state = {
-            fireRedirect: false
-        }
     }
 
     login = async (e) => {
@@ -20,26 +25,28 @@ class LoginForm extends Component {
                 password: e.target.password.value
             })
 
-            console.log(user)
-
             window.localStorage.setItem('loggedUser', JSON.stringify(user))
-
-
             this.props.handleSubmit()
+
         } catch (exception) {
-            console.log("LOG IN FAILED, MAKE SOME NOTIFICATION HERE")
+            await this.props.showDialogWarning()
         }
-    
-        this.setState({
-            fireRedirect: true
-        })
 
-
-
+        if (!this.props.failedLoginWarning) {
+            this.props.fireRedirect()
+        }
     }
 
 
     render() {
+
+        const alertWarningAction = [
+            <FlatButton
+                label='Back'
+                primary={true}
+                onClick={this.props.hideDialogWarning}
+            />
+        ]
 
         return (
             <div>
@@ -74,14 +81,43 @@ class LoginForm extends Component {
                 </form>
 
 
-                {this.state.fireRedirect && (
+                <Dialog
+                    actions={alertWarningAction}
+                    modal={false}
+                    open={this.props.failedLoginWarning}
+                    onRequestClose={this.props.hideDialogWarning}
+                >
+                    Wrong username or password
+                </Dialog>
 
-                    <Redirect to='/profile' />
+                <div>
+                    {this.props.checkIfRedirected && (
 
-                )}
+                        <Redirect to='/profile' />
+
+                    )}
+                </div>
+
             </div>
         )
     }
 }
 
-export default LoginForm
+const mapStateToProps = (state) => {
+    console.log(state)
+    return {
+        checkIfRedirected: state.login.fireRedirect,
+        failedLoginWarning: state.login.failedLoginWarning
+    }
+}
+
+const mapDispatchToProps = {
+    fireRedirect,
+    showDialogWarning,
+    hideDialogWarning
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(LoginForm)

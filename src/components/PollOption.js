@@ -1,8 +1,6 @@
 import React from 'react'
 
-
 const PollOption = (props) => {
-
 
     return (
         <div className='pollOption'>
@@ -22,7 +20,7 @@ const PollOption = (props) => {
 
             </div>
         </div>
-    
+
     )
 }
 

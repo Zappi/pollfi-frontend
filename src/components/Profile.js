@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import profileService from '../services/profile';
 
-
 import { connect } from 'react-redux'
 import { fetchProfile } from '../reducers/profileReducer'
 
@@ -11,6 +10,7 @@ class Profile extends Component {
 
     }
 
+    /*Fetches the profile information */
     async componentDidMount() {
         this.props.fetchProfile()
     }
@@ -18,8 +18,10 @@ class Profile extends Component {
     render() {
         return (
             <div>
-                <h4> Hello {this.props.profile.username} </h4>
-                <h5> You have created  polls </h5>
+                <div className='profile-information'>
+                    <h4> Hello {this.props.profile.username} </h4>
+                    <h5> You have created  polls </h5>
+                </div>
             </div>
         )
     }
