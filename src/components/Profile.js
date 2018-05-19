@@ -12,15 +12,29 @@ class Profile extends Component {
 
     /*Fetches the profile information */
     async componentDidMount() {
-        this.props.fetchProfile()
+        await this.props.fetchProfile()
     }
 
     render() {
+
+        let userPolls = this.props.profile.polls
+        
+        if(userPolls===undefined) {
+            userPolls = []
+        }
+        
         return (
             <div>
                 <div className='profile-information'>
                     <h4> Hello {this.props.profile.username} </h4>
-                    <h5> You have created  polls </h5>
+
+                    {userPolls.length > 0? (
+                        <h5> You have created  polls </h5>
+                    ) : (
+                            <h5> You haven't created any polls yet :( </h5>
+                        )}
+
+
                 </div>
             </div>
         )

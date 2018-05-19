@@ -51,7 +51,6 @@ const vote = async (votedPoll) => {
 }
 
 const remove = async (pollId, pollUser) => {
-    console.log(pollUser._id)
     const config = {
         headers: {
             'Authorization': TokenService.getToken(),

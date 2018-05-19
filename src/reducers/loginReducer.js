@@ -10,6 +10,11 @@ const loginReducer = (state = initialState, action) => {
             return Object.assign({}, state, {
                 fireRedirect: action.data
             })
+        
+        case 'FIRE_REDIRECT_TO_FALSE':
+            return Object.assign({}, state, {
+                fireRedirect: action.data
+            })    
 
         case 'HANDLE_DIALOG_WARNING':
             return Object.assign({}, state, {
@@ -27,6 +32,12 @@ export const fireRedirect = () => {
         dispatch({
             type: 'FIRE_REDIRECT',
             data: true
+        })
+        setTimeout(() => {
+                dispatch({
+                    type:'FIRE_REDIRECT_TO_FALSE',
+                    data: false
+                },1000)
         })
     }
 }

@@ -1,33 +1,25 @@
 import React, { Component } from 'react'
 import ListedPollCard from './ListedPollCard'
 import { Redirect } from 'react-router-dom'
+import { Pagination } from 'react-bootstrap'
 
 import { connect } from 'react-redux'
-import { fetchPolls, removePoll } from '../reducers/pollReducer'
+import { fetchPolls, removePoll, handlePollClick } from '../reducers/pollReducer'
+
 
 class Polls extends Component {
     constructor(props) {
         super(props)
-
-        /*Todo remove state and move to reducer */
-        this.state = {
-            fireRedirect: false,
-            pollId: ''
-        }
         this.removePoll = this.removePoll.bind(this)
     }
-
     /*Fetches polls with reducer */
     async componentDidMount() {
-       await this.props.fetchPolls()
+        await this.props.fetchPolls()
 
     }
 
-    handleClick(id) {
-        this.setState({
-            fireRedirect: true,
-            pollId: id
-        })
+    handleClick(pollId) {
+        this.props.handlePollClick(pollId)
     }
 
     async removePoll(poll) {
@@ -45,10 +37,9 @@ class Polls extends Component {
                 </div>
 
 
-                {this.state.fireRedirect && (
-                    <Redirect to={`/polls/poll/${this.state.pollId}`} />
+                {this.props.fireRedirect && (
+                    <Redirect to={`/polls/poll/${this.props.pollId}`} />
                 )}
-
             </div>
         )
     }
@@ -56,13 +47,17 @@ class Polls extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        polls: state.polls
+        polls: state.polls.polls,
+        fireRedirect: state.polls.fireRedirect,
+        pollId: state.polls.pollId,
+        currentPageNumber: state.polls.currentPageNumber
     }
 }
 
 const mapDispatchToProps = {
     fetchPolls,
-    removePoll
+    removePoll,
+    handlePollClick
 }
 
 
