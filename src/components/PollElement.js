@@ -41,9 +41,10 @@ class PollElement extends Component {
         const optionsWithoutId = []
 
         if (this.props.dataFetched) {
-            const optionsWithId = this.props.pollElement.options.map((poll) => {
+            this.props.pollElement.options.forEach((poll) => {
                 optionsWithoutId.push({ option: poll.option, Upvotes: poll.upvotes })
             })
+
         }
 
         let authenticated = false

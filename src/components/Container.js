@@ -17,6 +17,7 @@ const Container = (props) => {
     /* Check if the user is logged in */
     const authenticated = ProfileService.getUserFromLocalStorage()
 
+   
     /*If the user is authenticated use these routes */
     if (authenticated != null) {
 

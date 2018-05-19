@@ -14,10 +14,11 @@ class App extends Component {
     }
   }
 
+
   componentDidMount() {
     this.checkIfUserIsLoggedIn()
   }
-
+  /* Probably should move all login functions to own file */
   checkIfUserIsLoggedIn = () => {
     if (ProfileService.getUserFromLocalStorage() != null) {
       this.setState({
@@ -50,7 +51,6 @@ class App extends Component {
 
 
   render() {
-
     return (
       <MuiThemeProvider>
         <div>

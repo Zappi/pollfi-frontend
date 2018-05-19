@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import ListedPollCard from './ListedPollCard'
 import { Redirect } from 'react-router-dom'
-import { Pagination } from 'react-bootstrap'
-
 import { connect } from 'react-redux'
 import { fetchPolls, removePoll, handlePollClick } from '../reducers/pollReducer'
 

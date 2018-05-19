@@ -21,7 +21,7 @@ class PollForm extends Component {
         }
 
         let invalidOptions = []
-        this.state.options.map((option) => {
+        this.state.options.forEach((option) => {
             if (option.option.length === 0 || option.option.length > 70) {
                 invalidOptions.push(false)
             }

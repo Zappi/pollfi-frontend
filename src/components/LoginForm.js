@@ -11,9 +11,7 @@ class LoginForm extends Component {
     static propTypes = {
         handleSubmit: PropTypes.func.isRequired
     }
-    constructor() {
-        super()
-    }
+   
 
     login = async (e) => {
         e.preventDefault()
